@@ -10,6 +10,7 @@ const LazyDashboard = lazy(() => import('./views/dashboard'));
 const LazyProfile = lazy(() => import('./views/profile'));
 
 
+
 function App() {
   const [user, setUser] = useState()
 
