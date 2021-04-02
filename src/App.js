@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { Route, Redirect, Switch, useHistory } from 'react-router-dom'
+import NotFound from './views/notFound';
+import Navbar from './components/navbar';
+import { getCurrentUser } from './services/auth';
+
+const LazyLogin = lazy(() => import('./views/login'));
+const LazyRegister = lazy(() => import('./views/register'));
+const LazyDashboard = lazy(() => import('./views/dashboard'));
+const LazyProfile = lazy(() => import('./views/profile'));
+
 
 function App() {
+  const [user, setUser] = useState()
+
+  const history = useHistory()
+
+  useEffect(() => {
+    const _user = getCurrentUser()
+    setUser(_user)
+
+    if (user) {
+      history.push('/')
+    }
+
+    else if (window.location.href.includes('login')) {
+      history.push('/login')
+    }
+
+    else {
+      if (!_user) {
+        history.push('/register')
+      }
+    }
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      {
+        user &&
+        <Navbar />
+      }
+      <Switch >
+        <Route path='/login' component={LazyLogin}></Route>
+        <Route path='/register' component={LazyRegister}></Route>
+        <Route path='/profile' component={LazyProfile}></Route>
+        <Route exact path='/' component={LazyDashboard}></Route>
+        <Route path='/not-found' component={NotFound}></Route>
+        <Redirect to='/not-found' />
+      </Switch>
+    </Suspense>
   );
 }
 
