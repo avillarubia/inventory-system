@@ -2,6 +2,8 @@ import { useState } from "react"
 import { register } from '../services/user'
 import { useHistory } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
+import FormLogo from "../components/formLogo";
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [first_name, setFirstname] = useState('')
@@ -22,8 +24,10 @@ const Register = () => {
         try {
             await register(payload)
             history.push('/login')
+            toast.success('You are successfully registered.')
         } catch (error) {
-
+            const { message, data } = error.response
+            toast.error(message || data)
         }
     }
 
@@ -31,6 +35,8 @@ const Register = () => {
         <div className='container'>
             <div className='mt-5 d-flex justify-content-center'>
                 <div className="p-5 shadow-sm rounded" style={{ width: '30rem' }}>
+                    <FormLogo />
+                    <div className='mt-4' />
                     <small>First name</small>
                     <input
                         type="text"

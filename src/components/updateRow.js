@@ -1,11 +1,12 @@
 import { useState } from "react";
 import InputNumber from "./inputNumber";
 import { getCurrentUser } from './../services/auth';
-import { updateItem, removeItem } from "../services/item";
+import { updateItem } from "../services/item";
 import moment from 'moment'
+import { toast } from "react-toastify";
 
 const UpdateRow = (props) => {
-    const { items, rowClicked, setRowClicked, setItems } = props
+    const { items, rowClicked, setRowClicked, setItems, setItem } = props
     const user = getCurrentUser()
 
     const [_id, setId] = useState('')
@@ -23,7 +24,7 @@ const UpdateRow = (props) => {
         setRowClicked(index)
     }
 
-    const handleClickUpdate = async () => {
+    const handleUpdateClick = async () => {
         const payload = {
             _id,
             name,
@@ -35,24 +36,17 @@ const UpdateRow = (props) => {
 
         try {
             await updateItem(payload)
+            toast.success(`Item with id ${_id} has been successfully updated.`)
         } catch (error) {
-
+            const { message, data } = error.response
+            toast.error(message || data)
         }
 
         setRowClicked(null)
     }
 
-    const handleClickRemove = async (id) => {
-        try {
-            await removeItem(id)
-
-            setItems(items =>
-                items.filter(item => item._id !== id)
-            )
-            setRowClicked(null)
-        } catch (error) {
-
-        }
+    const handleRemoveClick = (item) => {
+        setItem(item)
     }
 
     const renderInputText = (defaultValue, setter) => <>
@@ -134,16 +128,17 @@ const UpdateRow = (props) => {
 
                             <button
                                 className={'btn btn-primary'}
-                                onClick={() => handleClickUpdate}
+                                onClick={() => handleUpdateClick()}
                             >
-                                <i class="fas fa-edit"></i>
+                                <i className="fas fa-edit"></i>
                             </button>
                             :
                             <button
-                                className={'btn btn-danger'}
-                                onClick={() => handleClickRemove(item._id)}
+                                className={'btn btn-danger '}
+                                onClick={() => handleRemoveClick(item)}
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
                             >
-                                <i className="fas fa-trash-alt"></i>
+                                <i className="fas fa-trash-alt" ></i>
                             </button>
                     }
                 </td>

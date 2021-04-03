@@ -1,10 +1,16 @@
 import Table from "../components/table"
 
-const Dashboard = () => {
+const Dashboard = ({ setItem, items, setItems, rowClicked, setRowClicked }) => {
     return <>
         <div className='container'>
-            <h1>Dashboard</h1>
-            <Table />
+            <div className='mt-5' />
+            <Table
+                setItem={setItem}
+                items={items}
+                setItems={setItems}
+                rowClicked={rowClicked}
+                setRowClicked={setRowClicked}
+            />
         </div>
     </>
 }

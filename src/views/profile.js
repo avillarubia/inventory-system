@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { getCurrentUser } from './../services/auth';
 import { uploadImage } from './../services/upload';
 import { updateUser } from './../services/user'
@@ -23,7 +24,11 @@ const Profile = (props) => {
 
         try {
             await uploadImage(formData)
+
+            toast.success('An image has been successfully uploaded.')
         } catch (error) {
+            const { message, data } = error.response
+            toast.error(message || data)
         }
 
         setFile(null)
@@ -58,14 +63,17 @@ const Profile = (props) => {
                 <div className="mt-5 p-5 shadow-sm rounded" style={{ width: '30rem' }}>
                     <div className='row'>
                         <div className='col-12 d-flex justify-content-center'>
-                            <img
-                                className="rounded-circle"
-                                src={`http://localhost:3001/uploads/${user.avatar}`}
-                                style={{
-                                    height: '150px',
-                                    width: '150px'
-                                }}
-                            />
+                            {
+                                user.avatar &&
+                                <img
+                                    className="rounded-circle"
+                                    src={`http://localhost:3001/uploads/${user.avatar}`}
+                                    style={{
+                                        height: '150px',
+                                        width: '150px'
+                                    }}
+                                />
+                            }
                         </div>
 
                         <div className='mt-3' />

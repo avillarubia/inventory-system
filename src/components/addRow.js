@@ -2,6 +2,7 @@ import { useState } from "react"
 import { saveItem } from './../services/item';
 import InputNumber from "./inputNumber";
 import { getCurrentUser } from './../services/auth';
+import { toast } from "react-toastify";
 
 const AddRow = ({ setItems }) => {
     const user = getCurrentUser()
@@ -24,8 +25,11 @@ const AddRow = ({ setItems }) => {
         try {
             const { data } = await saveItem(payload)
             setItems(items => [...items, data])
+
+            toast.success('Item successfully added.')
         } catch (error) {
-            console.log(error)
+            const { message, data } = error.response
+            toast.error(message || data)
         }
     }
 

@@ -4,10 +4,9 @@ import AddRow from "./addRow";
 import Paginator from "./paginator";
 import UpdateRow from "./updateRow";
 import { getItems } from './../services/item';
+import { toast } from "react-toastify";
 
-const Table = () => {
-    const [rowClicked, setRowClicked] = useState(null)
-    const [items, setItems] = useState([])
+const Table = ({ setItem, items, setItems, rowClicked, setRowClicked }) => {
     const [groupedItems, setGroupedItems] = useState([])
     const [pageNo, setPageNo] = useState(1)
     const rowLimiter = 10
@@ -21,15 +20,25 @@ const Table = () => {
     }, [items.length])
 
     async function fetchItems() {
-        const { data } = await getItems()
-        setItems(data)
-        setGroupedItems(_.chunk(data, rowLimiter))
+        try {
+            const { data } = await getItems()
+            setItems(data)
+            setGroupedItems(_.chunk(data, rowLimiter))
+        } catch (error) {
+            const { message, data } = error.response
+            toast.error(message || data)
+        }
     }
 
     return (
         <>
-            <div className='overflow-scroll'>
-                <table className="table">
+            <Paginator
+                groupedItems={groupedItems}
+                pageNo={pageNo}
+                setPageNo={setPageNo}
+            />
+            <div style={{ overflowX: 'scroll' }}>
+                <table className="table" style={{ borderTop: 0 }}>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -49,17 +58,13 @@ const Table = () => {
                             rowClicked={rowClicked}
                             setRowClicked={setRowClicked}
                             setItems={setItems}
+                            setItem={setItem}
                         />
                         <AddRow setItems={setItems} />
                     </tbody>
                 </table>
             </div>
             <div className='mt-3' />
-            <Paginator
-                groupedItems={groupedItems}
-                pageNo={pageNo}
-                setPageNo={setPageNo}
-            />
         </>
     );
 }
