@@ -8,8 +8,10 @@ const config = {
     }
 }
 
-export function uploadImage(payload) {
-    return http.post('uploads', payload, config)
+export async function uploadImage(payload) {
+    const { data } = await http.post('uploads', payload, config)
+    localStorage.setItem('token', data)
+    http.setJWT(data)
 }
 
 export default {
