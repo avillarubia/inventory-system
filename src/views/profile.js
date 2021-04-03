@@ -78,10 +78,10 @@ const Profile = (props) => {
                                     onChange={e => handleFileChange(e)}
                                 />
                                 <button
-                                    className='btn btn-primary'
+                                    className='btn btn-primary float-right'
                                     type="submit"
                                 >
-                                    Upload
+                                    <i className="fas fa-cloud-upload-alt"></i>
                                 </button>
                             </form>
                         </div>
@@ -130,7 +130,7 @@ const Profile = (props) => {
                                 className='btn btn-primary'
                                 onClick={() => handleUpdateClick()}
                             >
-                                Update
+                                <i className="fas fa-save"></i>
                             </button>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ const Table = () => {
     return (
         <>
             <div className='overflow-scroll'>
-                <table className="table table-striped">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

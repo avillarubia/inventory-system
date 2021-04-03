@@ -44,6 +44,7 @@ const Login = () => {
                             className='btn btn-primary float-end'
                             onClick={() => handleLoginClick()}
                         >
+                            <i className="fas fa-sign-in-alt mr-2"></i>
                             Login
                         </button>
                         <div className='d-inline-flex'>

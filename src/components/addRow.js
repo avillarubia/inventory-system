@@ -68,7 +68,7 @@ const AddRow = ({ setItems }) => {
                     className='btn btn-primary'
                     onClick={() => handleAddClick()}
                 >
-                    Add
+                    <i className="fas fa-plus-circle"></i>
                 </button>
             </td>
         </tr>

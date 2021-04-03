@@ -131,18 +131,20 @@ const UpdateRow = (props) => {
                 <td>
                     {
                         rowClicked === index ?
+
                             <button
                                 className={'btn btn-primary'}
                                 onClick={() => handleClickUpdate}
                             >
-                                Update
-                             </button> :
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            :
                             <button
                                 className={'btn btn-danger'}
                                 onClick={() => handleClickRemove(item._id)}
                             >
-                                Remove
-                                 </button>
+                                <i className="fas fa-trash-alt"></i>
+                            </button>
                     }
                 </td>
             </tr>

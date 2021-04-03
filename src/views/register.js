@@ -62,6 +62,7 @@ const Register = () => {
                         className='btn btn-primary float-end'
                         onClick={() => handleRegisterClick()}
                     >
+                        <i className="fas fa-user-plus mr-2"></i>
                         Register
                     </button>
                     <div className='d-inline-flex'>
