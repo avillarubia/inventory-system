@@ -9,10 +9,9 @@ const LazyRegister = lazy(() => import('./views/register'));
 const LazyDashboard = lazy(() => import('./views/dashboard'));
 const LazyProfile = lazy(() => import('./views/profile'));
 
-
-
 function App() {
   const [user, setUser] = useState()
+  const [file, setFile] = useState()
 
   const history = useHistory()
 
@@ -39,12 +38,12 @@ function App() {
     <Suspense fallback={<div>Loading...</div>}>
       {
         user &&
-        <Navbar />
+        <Navbar file={file} />
       }
       <Switch >
         <Route path='/login' component={LazyLogin}></Route>
         <Route path='/register' component={LazyRegister}></Route>
-        <Route path='/profile' component={LazyProfile}></Route>
+        <Route path='/profile' render={() => <LazyProfile file={file} setFile={setFile} />}></Route>
         <Route exact path='/' component={LazyDashboard}></Route>
         <Route path='/not-found' component={NotFound}></Route>
         <Redirect to='/not-found' />

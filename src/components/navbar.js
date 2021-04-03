@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { logout } from "../services/auth";
 import { getCurrentUser } from './../services/auth';
 
-const Navbar = () => {
-    const user = getCurrentUser()
+const Navbar = ({ file }) => {
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        const _user = getCurrentUser()
+        setUser(_user)
+    }, [file])
 
     const handleLogoutClick = () => {
         logout()

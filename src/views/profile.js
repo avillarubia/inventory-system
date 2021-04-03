@@ -3,9 +3,9 @@ import { getCurrentUser } from './../services/auth';
 import { uploadImage } from './../services/upload';
 import { updateUser } from './../services/user'
 
-const Profile = () => {
+const Profile = (props) => {
+    const { file, setFile } = props
     const [user, setUser] = useState({})
-    const [file, setFile] = useState(null)
     const [first_name, setFirstname] = useState(user.first_name)
     const [last_name, setLastname] = useState(user.last_name)
     const [password, setPassword] = useState('')
@@ -82,7 +82,7 @@ const Profile = () => {
                                     type="submit"
                                 >
                                     Upload
-                    </button>
+                                </button>
                             </form>
                         </div>
 
