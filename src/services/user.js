@@ -1,4 +1,11 @@
 import http from './http'
+import { getJWT } from './auth'
+
+const config = {
+  headers: {
+    'x-auth-token': getJWT()
+  }
+}
 
 export async function register(payload) {
   const { data } = await http.post('users', payload)
@@ -6,7 +13,7 @@ export async function register(payload) {
 }
 
 export async function updateUser(payload) {
-  const { data } = await http.patch('users', payload)
+  const { data } = await http.patch('users', payload, config)
   localStorage.setItem('token', data)
   http.setJWT(data)
 }
