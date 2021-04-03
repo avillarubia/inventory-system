@@ -18,16 +18,26 @@ const Navbar = () => {
                         Inventory System
                     </NavLink>
                 </li>
-                <li className="nav-item">
-                    <NavLink className='nav-link' to='/profile'>
-                        {
-                            user?.first_name ?
-                                user?.first_name :
-                                'Profile'
-                        }
-                    </NavLink>
+                <li className="ml-4 nav-item">
+                    <div className='d-inline-flex align-items-center'>
+                        <img
+                            className="rounded-circle"
+                            src={`http://localhost:3001/uploads/${user.avatar}`}
+                            style={{
+                                height: '30px',
+                                width: '30px'
+                            }}
+                        />
+                        <NavLink className='nav-link' to='/profile'>
+                            {
+                                user?.first_name ?
+                                    user?.first_name :
+                                    'Profile'
+                            }
+                        </NavLink>
+                    </div>
                 </li>
-                <li className="nav-item">
+                <li className="ml-4 nav-item">
                     <NavLink className='nav-link' to='/login' onClick={() => handleLogoutClick()}>
                         Logout
                     </NavLink>
