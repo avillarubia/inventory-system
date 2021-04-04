@@ -43,7 +43,10 @@ function App() {
 
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={
+      <div className='vh-100 d-flex justify-content-center align-items-center'>Loading...</div>
+    }
+    >
       <ToastContainer />
       <RemoveItemModal
         item={item}

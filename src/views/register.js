@@ -34,7 +34,7 @@ const Register = () => {
     return (
         <div className='container'>
             <div className='mt-5 d-flex justify-content-center'>
-                <div className="p-5 shadow-sm rounded" style={{ width: '30rem' }}>
+                <div className="p-5 shadow rounded" style={{ width: '30rem' }}>
                     <FormLogo />
                     <div className='mt-4' />
                     <small>First name</small>

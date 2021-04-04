@@ -60,7 +60,7 @@ const Profile = (props) => {
     return (
         <div className='container'>
             <div className='d-flex justify-content-center'>
-                <div className="mt-5 p-5 shadow-sm rounded" style={{ width: '30rem' }}>
+                <div className="mt-5 p-5 shadow rounded" style={{ width: '30rem' }}>
                     <div className='row'>
                         <div className='col-12 d-flex justify-content-center'>
                             {
@@ -138,7 +138,8 @@ const Profile = (props) => {
                                 className='btn btn-primary'
                                 onClick={() => handleUpdateClick()}
                             >
-                                <i className="fas fa-save"></i>
+                                <i className="fas fa-save mr-2"></i>
+                                Save
                             </button>
                         </div>
                     </div>
