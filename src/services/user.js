@@ -12,8 +12,8 @@ export async function register(payload) {
   return data
 }
 
-export async function updateUser(payload) {
-  const { data } = await http.patch('users', payload, config)
+export async function updateUser(id, payload) {
+  const { data } = await http.patch(`users/update/${id}`, payload, config)
   localStorage.setItem('token', data)
   http.setJWT(data)
 }

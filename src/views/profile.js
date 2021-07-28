@@ -40,16 +40,16 @@ const Profile = (props) => {
 
     const handleUpdateClick = async () => {
         const payload = {
-            _id: user._id,
             first_name,
             last_name,
             password
         }
         try {
-            await updateUser(payload)
-
+            await updateUser(user._id, payload)
+            toast.success('Update success.')
         } catch (error) {
-            console.log(error)
+            const { message, data } = error?.response
+            toast.error(message || data)
         }
     }
 

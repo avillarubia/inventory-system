@@ -17,10 +17,10 @@ const UpdateRow = (props) => {
 
     const handleRowClick = (index, item) => {
         setId(item._id)
-        setName(item.name)
+        setName(name)
         setPrice(price)
         setQuantity(quantity)
-        setDescription(item.description)
+        setDescription(description)
         setRowClicked(index)
     }
 
@@ -99,7 +99,11 @@ const UpdateRow = (props) => {
         items.map((item, index) =>
             <tr onClick={() => handleRowClick(index, item)}>
                 <th scope="row">{index}</th>
-                <td scope="row">{item._id}</td>
+                <td scope="row" >
+                    <p>
+                        {item._id.split('').splice(item._id.length - 6, item._id.length - 1)}
+                    </p>
+                </td>
                 <td>
                     {renderCellTextDisplay(index, item.name, setName)}
                 </td>
